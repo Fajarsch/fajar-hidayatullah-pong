@@ -7,6 +7,8 @@ public class BallContoller : MonoBehaviour
     public Vector2 speed;
     private Rigidbody2D rig;
 
+    public Vector2 resetPosBall;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +20,9 @@ public class BallContoller : MonoBehaviour
     void Update()
     {   
         // Move object
+    }
+
+    public void ResetBall() {
+        transform.position = new Vector3(resetPosBall.x, resetPosBall.y, 2);
     }
 }
