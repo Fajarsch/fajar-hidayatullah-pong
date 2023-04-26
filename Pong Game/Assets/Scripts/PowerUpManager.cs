@@ -16,7 +16,7 @@ public class PowerUpManager : MonoBehaviour
     void Start()
     {
         powerUpList = new List<GameObject>();
-        timer = 0;
+        timer = 0f;
     }
 
     // Update is called once per frame
@@ -53,7 +53,7 @@ public class PowerUpManager : MonoBehaviour
 
         int randomIndex = Random.Range(0, powerUpTemplateList.Count);
 
-        GameObject powerUp = Instantiate(powerUpTemplateList[randomIndex], new Vector3(position.x, position.y, powerUpTemplateList[randomIndex].transform.position.z), Quaternion.identity, spawnArea);
+        GameObject powerUp = Instantiate(powerUpTemplateList[randomIndex], position, Quaternion.identity, spawnArea);
         powerUp.SetActive(true);
 
         powerUpList.Add(powerUp);
@@ -67,9 +67,9 @@ public class PowerUpManager : MonoBehaviour
 
     public void RemoveAllPowerUp()
     {
-        while (powerUpList.Count > 0)
+        for (int i = powerUpList.Count - 1; i >= 0; i--)
         {
-            RemovePowerUp(powerUpList[0]);
+            RemovePowerUp(powerUpList[i]);
         }
     }
 }
