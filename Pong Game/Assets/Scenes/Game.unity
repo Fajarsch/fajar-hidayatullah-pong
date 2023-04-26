@@ -1565,13 +1565,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c408f89f63e503845bee0cd7b799071d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 5
+  spawnInterval: 3
   spawnArea: {fileID: 1646382762}
   maxPowerUpAmount: 2
   powerUpAreaMin: {x: -8, y: -4}
   powerUpAreaMax: {x: 8, y: 4}
   powerUpTemplateList:
   - {fileID: 878977935}
+  removeInterval: 5
 --- !u!1 &1755344471
 GameObject:
   m_ObjectHideFlags: 0
