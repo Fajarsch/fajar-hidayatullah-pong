@@ -11,12 +11,16 @@ public class PowerUpManager : MonoBehaviour
     public Vector2 powerUpAreaMin, powerUpAreaMax;
     private List<GameObject> powerUpList;
     public List<GameObject> powerUpTemplateList;
+    public float removeInterval;
+    private float removeTimer;
 
     // Start is called before the first frame update
     void Start()
     {
         powerUpList = new List<GameObject>();
         timer = 0f;
+
+        removeTimer = 0;
     }
 
     // Update is called once per frame
@@ -28,6 +32,14 @@ public class PowerUpManager : MonoBehaviour
         {
             GenerateRandomPowerUp();
             timer -= spawnInterval;
+        }
+
+        removeTimer += Time.deltaTime;
+
+        if (removeTimer > removeInterval)
+        {
+            RemoveAllPowerUp();
+            removeTimer = 0;
         }
     }
 
@@ -53,10 +65,11 @@ public class PowerUpManager : MonoBehaviour
 
         int randomIndex = Random.Range(0, powerUpTemplateList.Count);
 
-        GameObject powerUp = Instantiate(powerUpTemplateList[randomIndex], position, Quaternion.identity, spawnArea);
+        GameObject powerUp = Instantiate(powerUpTemplateList[randomIndex], new Vector3(position.x, position.y, powerUpTemplateList[randomIndex].transform.position.z), Quaternion.identity, spawnArea);
         powerUp.SetActive(true);
 
         powerUpList.Add(powerUp);
+        removeTimer = 0;
     }
 
     public void RemovePowerUp(GameObject powerUp)
@@ -67,9 +80,10 @@ public class PowerUpManager : MonoBehaviour
 
     public void RemoveAllPowerUp()
     {
-        for (int i = powerUpList.Count - 1; i >= 0; i--)
+        foreach (GameObject powerUp in powerUpList)
         {
-            RemovePowerUp(powerUpList[i]);
+            Destroy(powerUp);
         }
+        powerUpList.Clear();
     }
 }
