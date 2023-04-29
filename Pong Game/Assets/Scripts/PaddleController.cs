@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PaddleController : MonoBehaviour
 {
-    public int speed;
+    public Vector2 speed;
     public KeyCode upKey;
     public KeyCode downKey;
     private Rigidbody2D rig;
@@ -15,27 +15,23 @@ public class PaddleController : MonoBehaviour
     {
         rig = GetComponent<Rigidbody2D>();
         paddleScale = transform.localScale;
+        rig.velocity = speed;
     }
 
     // Update is called once per frame
     void Update()
     {   
-        //  Get input
         Vector3 movement = GetInput();
-
-        // Move object
         MoveObject(movement);
     }
 
     private Vector2 GetInput()
     {
         if(Input.GetKey(upKey)) {
-            // Paddle up
             return Vector2.up * speed;
         }
 
         if(Input.GetKey(downKey)) {
-            // Paddle down
             return Vector2.down * speed;
         }
 
@@ -58,5 +54,17 @@ public class PaddleController : MonoBehaviour
         transform.localScale = new Vector3(paddleScale.x, paddleScale.y * increaseScale, paddleScale.z);
         yield return new WaitForSeconds(duration);
         transform.localScale = paddleScale;
+    }
+
+    public void ActivatePUSpeedUp(float magnitude, float duration)
+    {
+        speed *= magnitude;
+        StartCoroutine(DeactivatePUSpeedUp(magnitude, duration));
+    }
+    
+    private IEnumerator DeactivatePUSpeedUp(float magnitude, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        speed /= magnitude;
     }
 }
