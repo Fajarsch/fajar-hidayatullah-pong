@@ -7,13 +7,14 @@ public class PaddleController : MonoBehaviour
     public int speed;
     public KeyCode upKey;
     public KeyCode downKey;
-
     private Rigidbody2D rig;
+    private Vector3 paddleScale;
 
     // Start is called before the first frame update
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        paddleScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -44,5 +45,18 @@ public class PaddleController : MonoBehaviour
     private void MoveObject(Vector2 movement)
     {   
         rig.velocity = movement;
+    }
+
+    public void ActivatePUIncreasePaddle(float increaseScale, float duration)
+    {
+        StartCoroutine(IncreasePaddle(increaseScale, duration));
+    }
+
+    private IEnumerator IncreasePaddle(float increaseScale, float duration)
+    {
+        Vector3 paddleScale = transform.localScale;
+        transform.localScale = new Vector3(paddleScale.x, paddleScale.y * increaseScale, paddleScale.z);
+        yield return new WaitForSeconds(duration);
+        transform.localScale = paddleScale;
     }
 }

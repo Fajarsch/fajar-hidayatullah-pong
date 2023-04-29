@@ -6,7 +6,6 @@ public class BallContoller : MonoBehaviour
 {
     public Vector2 speed;
     private Rigidbody2D rig;
-
     public Vector2 resetPosBall;
 
     // Start is called before the first frame update

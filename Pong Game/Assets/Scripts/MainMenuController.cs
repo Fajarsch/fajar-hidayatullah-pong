@@ -14,4 +14,15 @@ public class MainMenuController : MonoBehaviour
     {
         Debug.Log("Created By Fajarsch");
     }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void OpenCredit()
+    {
+        Debug.Log("Fajar Hidayatullah");
+        Debug.Log("Find me at github.com/fajarsch");
+    }
 }
