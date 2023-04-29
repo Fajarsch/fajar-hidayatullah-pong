@@ -15,12 +15,6 @@ public class BallContoller : MonoBehaviour
         rig.velocity = speed;
     }
 
-    // Update is called once per frame
-    void Update()
-    {   
-        // Move object
-    }
-
     public void ResetBall() {
         transform.position = new Vector3(resetPosBall.x, resetPosBall.y, 2);
         rig.velocity = speed;
